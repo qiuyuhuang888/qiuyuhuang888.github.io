@@ -8,13 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #1a365d;
-            --secondary-color: #2c5282;
-            --accent-color: #c53030;
-            --text-color: #2d3748;
-            --light-bg: #f7fafc;
-            --border-color: #e2e8f0;
-            --link-color: #2b6cb0;
+            --primary-color: #E87722;
+            --primary-dark: #D1600F;
+            --primary-light: #FF9A4D;
+            --secondary-color: #1B4D3E;
+            --secondary-light: #2E7D5A;
+            --accent-color: #C45C1C;
+            --text-color: #2C3E50;
+            --text-light: #5D6D7E;
+            --bg-warm: #FDF8F3;
+            --bg-cream: #F9F5F0;
+            --border-color: #E8DFD5;
+            --link-color: #E87722;
         }
 
         * {
@@ -27,7 +32,7 @@
             font-family: 'Source Sans Pro', sans-serif;
             line-height: 1.7;
             color: var(--text-color);
-            background-color: #fff;
+            background-color: var(--bg-warm);
         }
 
         .container {
@@ -38,16 +43,47 @@
 
         /* Header Section */
         header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: white;
-            padding: 60px 0;
+            padding: 80px 0 60px;
             position: relative;
+            overflow: hidden;
+            min-height: 280px;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .header-content {
             display: flex;
             align-items: center;
             gap: 40px;
+            position: relative;
+        }
+
+        .university-logo {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            width: 380px;
+            height: auto;
+            max-height: 150px;
+            opacity: 0.95;
+            filter: brightness(0) invert(1);
+            transition: opacity 0.3s;
+            object-fit: contain;
+        }
+
+        .university-logo:hover {
+            opacity: 1;
         }
 
         .profile-image {
@@ -61,6 +97,12 @@
             border-radius: 4px;
             border: 4px solid rgba(255,255,255,0.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .chinese-name {
+            font-family: 'KaiTi', 'STKaiti', '楷体', serif;
+            font-weight: 400;
+            font-size: 0.85em;
         }
 
         .profile-info h1 {
@@ -101,11 +143,12 @@
 
         /* Navigation */
         nav {
-            background-color: var(--light-bg);
-            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-cream);
+            border-bottom: 2px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(232, 119, 34, 0.1);
         }
 
         nav ul {
@@ -137,6 +180,10 @@
             border-bottom-color: var(--primary-color);
         }
 
+        nav a {
+            color: var(--secondary-color);
+        }
+
         /* Main Content */
         main {
             padding: 40px 0;
@@ -144,15 +191,30 @@
 
         section {
             margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--primary-color);
             padding-bottom: 10px;
             margin-bottom: 25px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
         }
 
         h3 {
@@ -163,13 +225,11 @@
 
         /* Education Section */
         .education-item {
-            margin-bottom: 20px;
-            padding: 15px 0;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .education-item:last-child {
-            border-bottom: none;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
         }
 
         .edu-header {
@@ -216,10 +276,11 @@
         }
 
         .research-box {
-            background: var(--light-bg);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
             padding: 20px;
             border-radius: 8px;
             border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(232, 119, 34, 0.08);
         }
 
         .research-box h3 {
@@ -237,10 +298,12 @@
             counter-increment: pub-counter;
             margin-bottom: 20px;
             padding: 20px;
-            background: var(--light-bg);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
             border-radius: 8px;
             position: relative;
             padding-left: 50px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .publication-list li::before {
@@ -254,7 +317,7 @@
 
         .pub-title {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             margin-bottom: 8px;
         }
 
@@ -278,11 +341,13 @@
         }
 
         .pub-meta a {
-            color: var(--link-color);
+            color: var(--primary-color);
             text-decoration: none;
+            font-weight: 500;
         }
 
         .pub-meta a:hover {
+            color: var(--accent-color);
             text-decoration: underline;
         }
 
@@ -290,24 +355,30 @@
         .working-paper {
             margin-bottom: 15px;
             padding: 15px;
-            background: #fff;
+            background: linear-gradient(135deg, white 0%, var(--bg-cream) 100%);
             border: 1px solid var(--border-color);
             border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
         .wp-status {
             display: inline-block;
-            background: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: white;
-            padding: 2px 10px;
+            padding: 3px 12px;
             border-radius: 12px;
             font-size: 0.75rem;
             margin-top: 8px;
+            font-weight: 500;
         }
 
         /* Experience */
         .experience-item {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
         }
 
         .exp-header {
@@ -345,11 +416,12 @@
         .conference-list li {
             padding: 10px 15px;
             margin-bottom: 8px;
-            background: var(--light-bg);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
             border-radius: 4px;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-left: 3px solid var(--primary-color);
         }
 
         .conference-list li::before {
@@ -367,12 +439,11 @@
         .scholarship-list li {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .scholarship-list li:last-child {
-            border-bottom: none;
+            padding: 12px 15px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
+            border-radius: 6px;
+            border-left: 3px solid var(--primary-color);
         }
 
         /* Skills */
@@ -383,9 +454,11 @@
         }
 
         .skill-category {
-            background: var(--light-bg);
+            background: linear-gradient(135deg, var(--bg-cream) 0%, white 100%);
             padding: 20px;
             border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .skill-category h3 {
@@ -402,7 +475,7 @@
 
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #0D3328 100%);
             color: white;
             text-align: center;
             padding: 30px 0;
@@ -419,6 +492,16 @@
             .header-content {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .university-logo {
+                position: relative;
+                top: 0;
+                right: 0;
+                width: 280px;
+                max-height: 120px;
+                margin: 20px auto 0;
+                display: block;
             }
 
             .profile-info h1 {
@@ -442,12 +525,38 @@
             .edu-header, .exp-header {
                 flex-direction: column;
             }
+
+            section {
+                padding: 20px;
+            }
         }
 
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        section:nth-child(5) { animation-delay: 0.4s; }
+        section:nth-child(6) { animation-delay: 0.5s; }
 
         /* Print styles */
         @media print {
@@ -456,8 +565,8 @@
             }
 
             header {
-                background: white;
-                color: black;
+                background: white !important;
+                color: black !important;
                 padding: 20px 0;
             }
 
@@ -467,6 +576,13 @@
 
             section {
                 page-break-inside: avoid;
+                background: white;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .university-logo {
+                display: none;
             }
         }
     </style>
@@ -479,7 +595,7 @@
                     <img src="avatar.jpg" alt="Qiuyu Huang">
                 </div>
                 <div class="profile-info">
-                    <h1>Qiuyu Huang</h1>
+                    <h1>Qiuyu Huang<span class="chinese-name">（黄秋煜）</span></h1>
                     <p class="title">Ph.D. Student in Management Science and Engineering</p>
                     <p class="title">Southern University of Science and Technology</p>
                     <div class="contact-info">
@@ -489,6 +605,7 @@
                         </a>
                     </div>
                 </div>
+                <img src="logo.png" alt="SUSTech Logo" class="university-logo">
             </div>
         </div>
     </header>
