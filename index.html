@@ -41,6 +41,41 @@
             padding: 0 20px;
         }
 
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 5px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
         /* Header Section */
         header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
@@ -149,6 +184,22 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(232, 119, 34, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
         }
 
         nav ul {
@@ -487,47 +538,177 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
+        /* Mobile Responsive - Enhanced */
         @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+
+            header {
+                padding: 60px 0 40px;
+                min-height: auto;
+            }
+
             .header-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 20px;
             }
 
             .university-logo {
                 position: relative;
                 top: 0;
                 right: 0;
-                width: 280px;
-                max-height: 120px;
-                margin: 20px auto 0;
+                width: 200px;
+                max-height: 80px;
+                margin: 10px auto 0;
                 display: block;
             }
 
+            .profile-image img {
+                width: 140px;
+                height: 170px;
+            }
+
             .profile-info h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
+            }
+
+            .profile-info .title {
+                font-size: 1rem;
             }
 
             .contact-info {
                 justify-content: center;
+                gap: 10px;
+            }
+
+            .contact-info a {
+                font-size: 0.85rem;
+            }
+
+            /* Mobile Navigation */
+            .nav-container {
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .mobile-menu-btn {
+                display: block;
             }
 
             nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-cream);
                 flex-direction: column;
+                border-bottom: 2px solid var(--border-color);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            nav ul.active {
+                display: flex;
             }
 
             nav a {
                 text-align: center;
                 border-bottom: none;
                 border-left: 3px solid transparent;
+                padding: 12px 20px;
+            }
+
+            nav a:hover {
+                border-left-color: var(--primary-color);
+                border-bottom-color: transparent;
             }
 
             .edu-header, .exp-header {
                 flex-direction: column;
+                gap: 5px;
+            }
+
+            .edu-header > div:last-child,
+            .exp-header > div:last-child {
+                text-align: left;
             }
 
             section {
                 padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .publication-list li {
+                padding: 15px;
+                padding-left: 40px;
+            }
+
+            .publication-list li::before {
+                left: 10px;
+                top: 15px;
+            }
+
+            .scholarship-list li {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .conference-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .profile-info h1 {
+                font-size: 1.4rem;
+            }
+
+            .profile-image img {
+                width: 120px;
+                height: 150px;
+            }
+
+            .institution {
+                font-size: 1rem;
+            }
+
+            .degree, .location, .date {
+                font-size: 0.85rem;
+            }
+
+            .pub-title {
+                font-size: 0.95rem;
+            }
+
+            .pub-authors, .pub-journal, .pub-meta {
+                font-size: 0.85rem;
             }
         }
 
@@ -560,7 +741,7 @@
 
         /* Print styles */
         @media print {
-            nav, footer {
+            nav, footer, .language-switcher {
                 display: none;
             }
 
@@ -588,6 +769,12 @@
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -595,9 +782,9 @@
                     <img src="avatar.jpg" alt="Qiuyu Huang">
                 </div>
                 <div class="profile-info">
-                    <h1>Qiuyu Huang<span class="chinese-name">（黄秋煜）</span></h1>
-                    <p class="title">Ph.D. Student in Management Science and Engineering</p>
-                    <p class="title">Southern University of Science and Technology</p>
+                    <h1 data-i18n="name">Qiuyu Huang<span class="chinese-name">（黄秋煜）</span></h1>
+                    <p class="title" data-i18n="title1">Ph.D. Student in Management Science and Engineering</p>
+                    <p class="title" data-i18n="title2">Southern University of Science and Technology</p>
                     <div class="contact-info">
                         <a href="mailto:huangqiuyu1014@gmail.com">
                             <i class="fas fa-envelope"></i>
@@ -611,53 +798,58 @@
     </header>
 
     <nav>
-        <ul>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#research">Research</a></li>
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#conferences">Conferences</a></li>
-            <li><a href="#awards">Awards</a></li>
-        </ul>
+        <div class="container nav-container">
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="#education" data-i18n="nav-education">Education</a></li>
+                <li><a href="#research" data-i18n="nav-research">Research</a></li>
+                <li><a href="#publications" data-i18n="nav-publications">Publications</a></li>
+                <li><a href="#experience" data-i18n="nav-experience">Experience</a></li>
+                <li><a href="#conferences" data-i18n="nav-conferences">Conferences</a></li>
+                <li><a href="#awards" data-i18n="nav-awards">Awards</a></li>
+            </ul>
+        </div>
     </nav>
 
     <main class="container">
         <!-- Education Section -->
         <section id="education">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <h2><i class="fas fa-graduation-cap"></i> <span data-i18n="education-title">Education</span></h2>
             <div class="education-item">
                 <div class="edu-header">
                     <div>
-                        <div class="institution">Southern University of Science and Technology</div>
-                        <div class="degree">Ph.D., Management Science and Engineering</div>
+                        <div class="institution" data-i18n="edu1-school">Southern University of Science and Technology</div>
+                        <div class="degree" data-i18n="edu1-degree">Ph.D., Management Science and Engineering</div>
                     </div>
                     <div style="text-align: right;">
-                        <div class="location">Shenzhen, China</div>
-                        <div class="date">Sep 2025 – Present</div>
-                    </div>
-                </div>
-            </div>
-            <div class="education-item">
-                <div class="edu-header">
-                    <div>
-                        <div class="institution">Jinan University</div>
-                        <div class="degree">M.S., Corporate Management</div>
-                                            </div>
-                    <div style="text-align: right;">
-                        <div class="location">Guangzhou, China</div>
-                        <div class="date">Sep 2022 – Jun 2025</div>
+                        <div class="location" data-i18n="edu1-location">Shenzhen, China</div>
+                        <div class="date" data-i18n="edu1-date">Sep 2025 – Present</div>
                     </div>
                 </div>
             </div>
             <div class="education-item">
                 <div class="edu-header">
                     <div>
-                        <div class="institution">Guangdong University of Foreign Studies</div>
-                        <div class="degree">B.S., Logistics Management</div>
-                                            </div>
+                        <div class="institution" data-i18n="edu2-school">Jinan University</div>
+                        <div class="degree" data-i18n="edu2-degree">M.S., Corporate Management</div>
+                    </div>
                     <div style="text-align: right;">
-                        <div class="location">Guangzhou, China</div>
-                        <div class="date">Sep 2018 – Jun 2022</div>
+                        <div class="location" data-i18n="edu2-location">Guangzhou, China</div>
+                        <div class="date" data-i18n="edu2-date">Sep 2022 – Jun 2025</div>
+                    </div>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="edu-header">
+                    <div>
+                        <div class="institution" data-i18n="edu3-school">Guangdong University of Foreign Studies</div>
+                        <div class="degree" data-i18n="edu3-degree">B.S., Logistics Management</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="location" data-i18n="edu3-location">Guangzhou, China</div>
+                        <div class="date" data-i18n="edu3-date">Sep 2018 – Jun 2022</div>
                     </div>
                 </div>
             </div>
@@ -665,26 +857,26 @@
 
         <!-- Research Interests -->
         <section id="research">
-            <h2><i class="fas fa-lightbulb"></i> Research Interests</h2>
+            <h2><i class="fas fa-lightbulb"></i> <span data-i18n="research-title">Research Interests</span></h2>
             <div class="research-grid">
                 <div class="research-box">
-                    <h3><i class="fas fa-cogs"></i> Methodologies</h3>
-                    <p>Game Theory, Optimization, Empirical OM Methods</p>
+                    <h3><i class="fas fa-cogs"></i> <span data-i18n="research-method-title">Methodologies</span></h3>
+                    <p data-i18n="research-method-content">Game Theory, Optimization, Empirical OM Methods</p>
                 </div>
                 <div class="research-box">
-                    <h3><i class="fas fa-globe"></i> Applications</h3>
-                    <p>Cross-border Supply Chain, Behavioral Operations, Sustainable/Socially Responsible Operations, Platform Economy, OM-Marketing/IS/Economics Interface, Data-driven Decision Making</p>
+                    <h3><i class="fas fa-globe"></i> <span data-i18n="research-app-title">Applications</span></h3>
+                    <p data-i18n="research-app-content">Cross-border Supply Chain, Behavioral Operations, Sustainable/Socially Responsible Operations, Platform Economy, OM-Marketing/IS/Economics Interface, Data-driven Decision Making</p>
                 </div>
             </div>
         </section>
 
         <!-- Publications -->
         <section id="publications">
-            <h2><i class="fas fa-book"></i> Publications</h2>
-            <p style="font-size: 0.85rem; color: #718096; margin-bottom: 15px;"><sup>†</sup> Co-first author; * Corresponding author</p>
+            <h2><i class="fas fa-book"></i> <span data-i18n="publications-title">Publications</span></h2>
+            <p style="font-size: 0.85rem; color: #718096; margin-bottom: 15px;" data-i18n="pub-note"><sup>†</sup> Co-first author; * Corresponding author</p>
             <ol class="publication-list">
                 <li>
-                    <div class="pub-title">Waiting or Inferring Information from Competitive CM: Ordering Timing Decisions under Information Disclosure Policy</div>
+                    <div class="pub-title" data-i18n="pub1-title">Waiting or Inferring Information from Competitive CM: Ordering Timing Decisions under Information Disclosure Policy</div>
                     <div class="pub-authors"><strong>Huang, Q.</strong>, Chen, L.*</div>
                     <div class="pub-journal">Transportation Research Part E: Logistics and Transportation Review</div>
                     <div class="pub-meta">
@@ -694,7 +886,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="pub-title">On the "Prisoner's Dilemma" of Order Timing in a Cross-border and Co-opetitive Supply Chain</div>
+                    <div class="pub-title" data-i18n="pub2-title">On the "Prisoner's Dilemma" of Order Timing in a Cross-border and Co-opetitive Supply Chain</div>
                     <div class="pub-authors">Chen, L., <strong>Huang, Q.</strong>, Xu, J.*</div>
                     <div class="pub-journal">Transportation Research Part E: Logistics and Transportation Review</div>
                     <div class="pub-meta">
@@ -705,92 +897,289 @@
                 </li>
             </ol>
 
-            <h3 style="margin-top: 30px;"><i class="fas fa-file-alt"></i> Selected Working Papers</h3>
+            <h3 style="margin-top: 30px;"><i class="fas fa-file-alt"></i> <span data-i18n="working-papers-title">Selected Working Papers</span></h3>
             <div class="working-paper">
                 <div class="pub-authors"><strong>Huang, Q.</strong>, Chen, L.<sup>†</sup>, Siqin, T.*, Chen Z.</div>
-                <div class="pub-title">Games of Procurement Strategy in a Three-tier Cross-border Supply Chain: Market Potential and Information-Driven Dynamics</div>
-                <span class="wp-status">Under first-round review in Journal of the Operational Research Society</span>
+                <div class="pub-title" data-i18n="wp1-title">Games of Procurement Strategy in a Three-tier Cross-border Supply Chain: Market Potential and Information-Driven Dynamics</div>
+                <span class="wp-status" data-i18n="wp1-status">Under first-round review in Journal of the Operational Research Society</span>
             </div>
             <div class="working-paper">
                 <div class="pub-authors">Chen L., <strong>Huang, Q.*</strong></div>
-                <div class="pub-title">The Effects of Innovation Effort, Tax Planning and Competition on Information Sharing in a Cross-border and Co-opetitive Supply Chain</div>
-                <span class="wp-status">To be submitted to Production and Operations Management</span>
+                <div class="pub-title" data-i18n="wp2-title">The Effects of Innovation Effort, Tax Planning and Competition on Information Sharing in a Cross-border and Co-opetitive Supply Chain</div>
+                <span class="wp-status" data-i18n="wp2-status">To be submitted to Production and Operations Management</span>
             </div>
             <div class="working-paper">
                 <div class="pub-authors">Chen, L., <strong>Huang, Q.</strong>, Siqin, T.*</div>
-                <div class="pub-title">Waiting Cost vs Lead Time: Delivery Format in Cross-Border E-Commerce Operations</div>
-                <span class="wp-status">To be finished</span>
+                <div class="pub-title" data-i18n="wp3-title">Waiting Cost vs Lead Time: Delivery Format in Cross-Border E-Commerce Operations</div>
+                <span class="wp-status" data-i18n="wp3-status">To be finished</span>
             </div>
         </section>
 
         <!-- Academic Experience -->
         <section id="experience">
-            <h2><i class="fas fa-briefcase"></i> Academic Experience</h2>
+            <h2><i class="fas fa-briefcase"></i> <span data-i18n="experience-title">Academic Experience</span></h2>
 
             <div class="experience-item">
                 <div class="exp-header">
                     <div>
-                        <span class="exp-title">Lingnan University</span>
-                        <span class="location">— New Territories, Hong Kong</span>
+                        <span class="exp-title" data-i18n="exp1-org">Lingnan University</span>
+                        <span class="location" data-i18n="exp1-location">— New Territories, Hong Kong</span>
                     </div>
-                    <span class="date">Jul 2024 – Nov 2024</span>
+                    <span class="date" data-i18n="exp1-date">Jul 2024 – Nov 2024</span>
                 </div>
-                <div class="exp-subtitle">Assistant Research Officer</div>
+                <div class="exp-subtitle" data-i18n="exp1-title">Assistant Research Officer</div>
                 <ul>
-                    <li>Assisted in draft writing, model derivation and mathematical proof on the topic of procurement strategy</li>
-                    <li>Assisted in proposal application, such as searching literature, checking calculation, and proof reading</li>
+                    <li data-i18n="exp1-duty1">Assisted in draft writing, model derivation and mathematical proof on the topic of procurement strategy</li>
+                    <li data-i18n="exp1-duty2">Assisted in proposal application, such as searching literature, checking calculation, and proof reading</li>
                 </ul>
             </div>
         </section>
 
         <!-- Conferences -->
         <section id="conferences">
-            <h2><i class="fas fa-microphone"></i> Selected Conference Presentations</h2>
+            <h2><i class="fas fa-microphone"></i> <span data-i18n="conferences-title">Selected Conference Presentations</span></h2>
             <ul class="conference-list">
-                <li><strong>POMS-China 2025</strong> — Danzhou, China, Jul 2025</li>
-                <li><strong>POMS-China 2024</strong> — Hefei, China, Jul 2024</li>
-                <li><strong>ACEM Doctoral Students Forum 2024</strong> — Shanghai, China, Jul 2024 (Outstanding paper)</li>
-                <li><strong>POMS-China 2023</strong> — Hangzhou, China, Jul 2023</li>
-                <li><strong>ICOSCM 2022</strong> — Online, Aug 2022</li>
+                <li><strong>POMS-China 2025</strong> — <span data-i18n="conf1-location">Danzhou, China, Jul 2025</span></li>
+                <li><strong>POMS-China 2024</strong> — <span data-i18n="conf2-location">Hefei, China, Jul 2024</span></li>
+                <li><strong>ACEM Doctoral Students Forum 2024</strong> — <span data-i18n="conf3-location">Shanghai, China, Jul 2024 (Outstanding paper)</span></li>
+                <li><strong>POMS-China 2023</strong> — <span data-i18n="conf4-location">Hangzhou, China, Jul 2023</span></li>
+                <li><strong>ICOSCM 2022</strong> — <span data-i18n="conf5-location">Online, Aug 2022</span></li>
             </ul>
         </section>
 
         <!-- Scholarships -->
         <section id="awards">
-            <h2><i class="fas fa-trophy"></i> Scholarships & Honors</h2>
+            <h2><i class="fas fa-trophy"></i> <span data-i18n="awards-title">Scholarships & Honors</span></h2>
             <ul class="scholarship-list">
-                <li><span>National Scholarship for Postgraduate Students</span> <span>2024-2025</span></li>
+                <li>
+                    <span data-i18n="award1-name">National Scholarship for Postgraduate Students</span>
+                    <span>2024-2025</span>
+                </li>
             </ul>
         </section>
 
         <!-- Skills -->
         <section id="skills">
-            <h2><i class="fas fa-tools"></i> Skills</h2>
+            <h2><i class="fas fa-tools"></i> <span data-i18n="skills-title">Skills</span></h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <h3><i class="fas fa-code"></i> <span data-i18n="skill-programming">Programming</span></h3>
                     <p>Mathematica, Python, MATLAB, SQL, LaTeX</p>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
-                    <p>Presentation, Teamwork, Communication, Organization</p>
+                    <h3><i class="fas fa-users"></i> <span data-i18n="skill-soft">Soft Skills</span></h3>
+                    <p data-i18n="skill-soft-content">Presentation, Teamwork, Communication, Organization</p>
                 </div>
                 <div class="skill-category">
-                    <h3><i class="fas fa-language"></i> Languages</h3>
-                    <p><strong>English</strong> (Fluent)<br>
-                       <strong>Mandarin</strong> (Native)<br>
-                       <strong>Cantonese</strong> (Native)</p>
+                    <h3><i class="fas fa-language"></i> <span data-i18n="skill-languages">Languages</span></h3>
+                    <p>
+                        <strong data-i18n="lang-en">English</strong> <span data-i18n="lang-en-level">(Fluent)</span><br>
+                        <strong data-i18n="lang-mandarin">Mandarin</strong> <span data-i18n="lang-mandarin-level">(Native)</span><br>
+                        <strong data-i18n="lang-cantonese">Cantonese</strong> <span data-i18n="lang-cantonese-level">(Native)</span>
+                    </p>
                 </div>
             </div>
-
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Qiuyu Huang. All rights reserved.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Last updated: April 2026</p>
+            <p data-i18n="footer-copyright">&copy; 2025 Qiuyu Huang. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;" data-i18n="footer-update">Last updated: April 2026</p>
         </div>
     </footer>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                "name": "Qiuyu Huang<span class=\"chinese-name\">（黄秋煜）</span>",
+                "title1": "Ph.D. Student in Management Science and Engineering",
+                "title2": "Southern University of Science and Technology",
+                "nav-education": "Education",
+                "nav-research": "Research",
+                "nav-publications": "Publications",
+                "nav-experience": "Experience",
+                "nav-conferences": "Conferences",
+                "nav-awards": "Awards",
+                "education-title": "Education",
+                "edu1-school": "Southern University of Science and Technology",
+                "edu1-degree": "Ph.D., Management Science and Engineering",
+                "edu1-location": "Shenzhen, China",
+                "edu1-date": "Sep 2025 – Present",
+                "edu2-school": "Jinan University",
+                "edu2-degree": "M.S., Corporate Management",
+                "edu2-location": "Guangzhou, China",
+                "edu2-date": "Sep 2022 – Jun 2025",
+                "edu3-school": "Guangdong University of Foreign Studies",
+                "edu3-degree": "B.S., Logistics Management",
+                "edu3-location": "Guangzhou, China",
+                "edu3-date": "Sep 2018 – Jun 2022",
+                "research-title": "Research Interests",
+                "research-method-title": "Methodologies",
+                "research-method-content": "Game Theory, Optimization, Empirical OM Methods",
+                "research-app-title": "Applications",
+                "research-app-content": "Cross-border Supply Chain, Behavioral Operations, Sustainable/Socially Responsible Operations, Platform Economy, OM-Marketing/IS/Economics Interface, Data-driven Decision Making",
+                "publications-title": "Publications",
+                "pub-note": "<sup>†</sup> Co-first author; * Corresponding author",
+                "pub1-title": "Waiting or Inferring Information from Competitive CM: Ordering Timing Decisions under Information Disclosure Policy",
+                "pub2-title": "On the \"Prisoner's Dilemma\" of Order Timing in a Cross-border and Co-opetitive Supply Chain",
+                "working-papers-title": "Selected Working Papers",
+                "wp1-title": "Games of Procurement Strategy in a Three-tier Cross-border Supply Chain: Market Potential and Information-Driven Dynamics",
+                "wp1-status": "Under first-round review in Journal of the Operational Research Society",
+                "wp2-title": "The Effects of Innovation Effort, Tax Planning and Competition on Information Sharing in a Cross-border and Co-opetitive Supply Chain",
+                "wp2-status": "To be submitted to Production and Operations Management",
+                "wp3-title": "Waiting Cost vs Lead Time: Delivery Format in Cross-Border E-Commerce Operations",
+                "wp3-status": "To be finished",
+                "experience-title": "Academic Experience",
+                "exp1-org": "Lingnan University",
+                "exp1-location": "— New Territories, Hong Kong",
+                "exp1-date": "Jul 2024 – Nov 2024",
+                "exp1-title": "Assistant Research Officer",
+                "exp1-duty1": "Assisted in draft writing, model derivation and mathematical proof on the topic of procurement strategy",
+                "exp1-duty2": "Assisted in proposal application, such as searching literature, checking calculation, and proof reading",
+                "conferences-title": "Selected Conference Presentations",
+                "conf1-location": "Danzhou, China, Jul 2025",
+                "conf2-location": "Hefei, China, Jul 2024",
+                "conf3-location": "Shanghai, China, Jul 2024 (Outstanding paper)",
+                "conf4-location": "Hangzhou, China, Jul 2023",
+                "conf5-location": "Online, Aug 2022",
+                "awards-title": "Scholarships & Honors",
+                "award1-name": "National Scholarship for Postgraduate Students",
+                "skills-title": "Skills",
+                "skill-programming": "Programming",
+                "skill-soft": "Soft Skills",
+                "skill-soft-content": "Presentation, Teamwork, Communication, Organization",
+                "skill-languages": "Languages",
+                "lang-en": "English",
+                "lang-en-level": "(Fluent)",
+                "lang-mandarin": "Mandarin",
+                "lang-mandarin-level": "(Native)",
+                "lang-cantonese": "Cantonese",
+                "lang-cantonese-level": "(Native)",
+                "footer-copyright": "&copy; 2025 Qiuyu Huang. All rights reserved.",
+                "footer-update": "Last updated: April 2026"
+            },
+            zh: {
+                "name": "黄秋煜<span class=\"chinese-name\">（Qiuyu Huang）</span>",
+                "title1": "管理科学与工程专业 博士研究生",
+                "title2": "南方科技大学",
+                "nav-education": "教育背景",
+                "nav-research": "研究方向",
+                "nav-publications": "发表论文",
+                "nav-experience": "学术经历",
+                "nav-conferences": "学术会议",
+                "nav-awards": "荣誉奖项",
+                "education-title": "教育背景",
+                "edu1-school": "南方科技大学",
+                "edu1-degree": "博士，管理科学与工程",
+                "edu1-location": "中国深圳",
+                "edu1-date": "2025年9月 – 至今",
+                "edu2-school": "暨南大学",
+                "edu2-degree": "硕士，企业管理",
+                "edu2-location": "中国广州",
+                "edu2-date": "2022年9月 – 2025年6月",
+                "edu3-school": "广东外语外贸大学",
+                "edu3-degree": "学士，物流管理",
+                "edu3-location": "中国广州",
+                "edu3-date": "2018年9月 – 2022年6月",
+                "research-title": "研究方向",
+                "research-method-title": "研究方法",
+                "research-method-content": "博弈论、优化方法、实证运营管理学方法",
+                "research-app-title": "应用领域",
+                "research-app-content": "跨境供应链、行为运营管理、可持续与社会责任运营、平台经济、运营管理与营销/信息系统/经济学交叉研究、数据驱动决策",
+                "publications-title": "发表论文",
+                "pub-note": "<sup>†</sup> 共同第一作者；* 通讯作者",
+                "pub1-title": "等待还是从竞争型合同制造商推断信息：信息披露政策下的订货时机决策",
+                "pub2-title": "跨境竞合供应链中订货时机的\"囚徒困境\"研究",
+                "working-papers-title": "工作论文",
+                "wp1-title": "三层级跨境供应链中的采购策略博弈：市场潜力与信息驱动动态",
+                "wp1-status": "投稿至 Journal of the Operational Research Society，首轮评审中",
+                "wp2-title": "创新投入、税收筹划与竞争对跨境竞合供应链中信息共享的影响",
+                "wp2-status": "准备投稿至 Production and Operations Management",
+                "wp3-title": "等待成本 vs 交货时间：跨境电商运营中的配送模式选择",
+                "wp3-status": "撰写中",
+                "experience-title": "学术经历",
+                "exp1-org": "岭南大学",
+                "exp1-location": "— 香港新界",
+                "exp1-date": "2024年7月 – 2024年11月",
+                "exp1-title": "助理研究员",
+                "exp1-duty1": "协助采购策略相关主题的论文撰写、模型推导和数学证明",
+                "exp1-duty2": "协助项目申请，包括文献检索、计算核查和校对工作",
+                "conferences-title": "学术会议报告",
+                "conf1-location": "中国儋州，2025年7月",
+                "conf2-location": "中国合肥，2024年7月",
+                "conf3-location": "中国上海，2024年7月（优秀论文奖）",
+                "conf4-location": "中国杭州，2023年7月",
+                "conf5-location": "线上，2022年8月",
+                "awards-title": "荣誉奖项",
+                "award1-name": "研究生国家奖学金",
+                "skills-title": "专业技能",
+                "skill-programming": "编程技能",
+                "skill-soft": "软技能",
+                "skill-soft-content": "学术演讲、团队协作、沟通交流、组织管理",
+                "skill-languages": "语言能力",
+                "lang-en": "英语",
+                "lang-en-level": "（流利）",
+                "lang-mandarin": "普通话",
+                "lang-mandarin-level": "（母语）",
+                "lang-cantonese": "粤语",
+                "lang-cantonese-level": "（母语）",
+                "footer-copyright": "&copy; 2025 黄秋煜. 保留所有权利。",
+                "footer-update": "最后更新：2026年4月"
+            }
+        };
+
+        // Language switcher
+        let currentLang = 'en';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update page language attribute
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Store preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language button event listeners
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+            });
+
+            // Load saved preference or default to English
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            switchLanguage(savedLang);
+        });
+    </script>
 </body>
 </html>
