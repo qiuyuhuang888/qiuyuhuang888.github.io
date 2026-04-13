@@ -115,6 +115,7 @@
             filter: brightness(0) invert(1);
             transition: opacity 0.3s;
             object-fit: contain;
+            display: block;
         }
 
         .university-logo:hover {
@@ -158,22 +159,46 @@
         .contact-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 15px;
+            gap: 14px;
+            margin-top: 18px;
         }
 
         .contact-info a {
             color: white;
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
-            transition: opacity 0.3s;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(27, 77, 62, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+            transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .contact-info a:hover {
-            opacity: 0.8;
+            transform: translateY(-2px);
+            background: rgba(16, 53, 41, 0.98);
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info a:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 3px;
+        }
+
+        .contact-icon {
+            width: 22px;
+            height: 22px;
+            display: block;
+            object-fit: contain;
+        }
+
+        .contact-icon.wordmark {
+            width: 28px;
         }
 
         /* Navigation */
@@ -246,6 +271,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            scroll-margin-top: 100px;
         }
 
         h2 {
@@ -590,7 +616,17 @@
             }
 
             .contact-info a {
-                font-size: 0.85rem;
+                width: 42px;
+                height: 42px;
+            }
+
+            .contact-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .contact-icon.wordmark {
+                width: 25px;
             }
 
             /* Mobile Navigation */
@@ -786,13 +822,21 @@
                     <p class="title" data-i18n="title1">Ph.D. Student in Management Science and Engineering</p>
                     <p class="title" data-i18n="title2">Southern University of Science and Technology</p>
                     <div class="contact-info">
-                        <a href="mailto:huangqiuyu1014@gmail.com">
-                            <i class="fas fa-envelope"></i>
-                            huangqiuyu1014@gmail.com
+                        <a href="mailto:huangqiuyu1014@gmail.com" aria-label="Email" title="Email">
+                            <img src="icons/email.svg" alt="" class="contact-icon">
+                        </a>
+                        <a href="https://scholar.google.com.hk/citations?user=xJiKsNcAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+                            <img src="icons/google-scholar.svg" alt="" class="contact-icon">
+                        </a>
+                        <a href="https://papers.ssrn.com/Sol3/Cf_Dev/AbsByAuth.cfm?per_id=5135223" target="_blank" rel="noopener noreferrer" aria-label="SSRN" title="SSRN">
+                            <img src="icons/ssrn.svg" alt="" class="contact-icon wordmark">
+                        </a>
+                        <a href="https://www.researchgate.net/profile/Qiuyu-Huang-5?ev=hdr_xprf" target="_blank" rel="noopener noreferrer" aria-label="ResearchGate" title="ResearchGate">
+                            <img src="icons/researchgate.svg" alt="" class="contact-icon wordmark">
                         </a>
                     </div>
                 </div>
-                <img src="logo.png" alt="SUSTech Logo" class="university-logo">
+                <img src="LOGO.png" alt="SUSTech Logo" class="university-logo" width="380" height="150" decoding="async">
             </div>
         </div>
     </header>
